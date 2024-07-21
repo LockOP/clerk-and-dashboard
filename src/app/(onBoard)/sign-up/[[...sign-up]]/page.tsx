@@ -1,11 +1,24 @@
 "use client";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { SignInButton, SignUp, useSignUp } from "@clerk/nextjs";
 import { OAuthStrategy } from "@clerk/types";
 import { useSignIn, SignIn } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+
 // import { error } from "console";
 
 export default function SignUpForm() {
@@ -150,87 +163,51 @@ export default function SignUpForm() {
   if (verifying) {
     return (
       <>
-        <div className="flex flex-col items-center">
-          <div className="w-full max-w-[413px] ">
-            <div className="w-full flex flex-col ">
-              <div className="w-full text-[40px] font-semibold ">
-                Create an account
+        <div className="flex flex-col items-center py-10">
+          <div className="w-full max-w-[420px] ">
+            <div className="w-full flex flex-col gap-6">
+              <div className="w-full text-4xl text-center font-medium">
+                Confirm your email
               </div>
-              <h1 className="w-full text-[15px] font-semibold pt-10">
-                Verify your email
-              </h1>
-              <form onSubmit={handleVerify} className="flex flex-col gap-2">
-                <label id="code" className="w-full text-[14px] font-normal">
-                  Enter your verification code
-                </label>
-                <input
-                  className="w-full pr-12 outline-[#3D53DB] border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-[14.5px] pb-[14.5px] "
-                  value={code}
-                  id="code"
-                  name="code"
-                  onChange={(e) => setCode(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-[#3D53DB] rounded-[10px] py-[13px] text-[#FFFFFF] text-4 font-semibold items-center justify-center"
-                >
-                  Verify
-                </button>
-              </form>
+              <div className="w-full text-sm text-muted-foreground text-center font-medium">
+                Enter the 6-digit code we sent to your email
+              </div>
+              <div className="w-full flex flex-col items-center">
+                <InputOTP maxLength={6} value={code} onChange={setCode}>
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                  </InputOTPGroup>
+                  <InputOTPSeparator />
+                  <InputOTPGroup>
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </div>
+              <Button variant="default" size="lg" onClick={handleVerify}>
+                Verify
+              </Button>
             </div>
           </div>
         </div>
-
-        {/* <h1>Verify your email</h1>
-        <form onSubmit={handleVerify}>
-          <label id="code">Enter your verification code</label>
-          <input
-            value={code}
-            id="code"
-            name="code"
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <button type="submit">Verify</button>
-        </form> */}
       </>
     );
   }
-  // Display a form to capture the user's email and password
+
   return (
     <>
-      {/* <h1>Sign in</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
-          <label htmlFor="email">Enter email address</label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            id="email"
-            name="email"
-            type="email"
-            value={email}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Enter password</label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-          />
-        </div>
-        <button type="submit">Sign in</button>
-      </form> */}
-      <div className="flex flex-col items-center">
-        
-        <div className="w-full max-w-[413px] ">
-          <div className="w-full flex flex-col items-center ">
-            <div className="w-full text-[40px] font-semibold ">
+      <div className="flex flex-col items-center py-10">
+        <div className="w-full max-w-[420px]">
+          <div className="w-full flex flex-col items-center gap-6">
+            <div className="w-full text-4xl text-center font-medium">
               Create an account
             </div>
-            <div className=" w-full flex flex-col gap-4 pt-13 pt-10">
-              <button
+            <div className="w-full flex flex-col gap-6">
+              {/* FcGoogle */}
+              <Button
                 onClick={() => {
                   signIn.authenticateWithRedirect({
                     redirectUrl: "/sign-up/sso-callback",
@@ -238,19 +215,17 @@ export default function SignUpForm() {
                     strategy: "oauth_google",
                   });
                 }}
-                className=" w-full hover:border-[#3D53DB] flex flex-row text-[14px] font-semibold border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-4 pb-[13px] items-center justify-center gap-4"
+                size="lg"
+                variant="outlineDark"
+                className="w-full flex flex-row gap-2 items-center justify-center"
               >
-                <div className="">
-                  <img
-                    className="w-[19px] h-[19px] object-contain"
-                    src="/signInUp/google.png"
-                    alt="Sample Image"
-                  />
-                </div>
-                <div className="">Sign up with Google</div>
-              </button>
+                <FcGoogle className="text-xl" />
+                <p className="text-sm font-medium text-foreground">
+                  Sign up with Google
+                </p>
+              </Button>
 
-              <button
+              <Button
                 onClick={() => {
                   signIn.authenticateWithRedirect({
                     redirectUrl: "/sign-up/sso-callback",
@@ -258,170 +233,132 @@ export default function SignUpForm() {
                     strategy: "oauth_facebook",
                   });
                 }}
-                className="w-full hover:border-[#3D53DB] flex flex-row gap-2 text-[14px] font-semibold border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-4 pb-[13px] items-center justify-center "
+                size="lg"
+                variant="outlineDark"
+                className="w-full flex flex-row gap-2 items-center justify-center"
               >
-                <div>
-                  <img
-                    src="/signInUp/facebook.png"
-                    className="w-[19px] h-[19px] object-contain"
-                    alt="Sample Image"
-                  />
-                </div>
-                <div>Sign up with Facebook</div>
-              </button>
+                {/* #1877F2 */}
+                <FaFacebook className="text-xl text-[#1877F2]" />
+                <p className="text-sm font-medium text-foreground">
+                  Sign up with Facebook
+                </p>
+              </Button>
             </div>
-            <div className="w-full flex flex-row pt-4 gap-2 items-center justify-center">
-              <div className="h-px bg-[#DFE1F3] border-[1px] flex-grow"></div>
-              <div className="text-[14px] font-normal justify-center">
+            <div className="w-full max-w-full flex flex-row gap-2 items-center justify-center relative">
+              <Separator />
+              <div className="text-[14px] shrink-0 font-normal justify-center absolute px-4 bg-white">
                 or sign up with email
               </div>
-              <div className="h-px bg-[#DFE1F3] border-[1px] flex-grow"></div>
             </div>
-            <div className="w-full flex flex-col flex-grow gap-3 pt-4">
-              <div className="w-full flex flex-col gap-4">
-                <div className="w-full text-[14px] font-semibold">
-                  Full Name
-                </div>
-                <input
+            <div className="w-full flex flex-col flex-grow gap-6">
+              <div className="grid w-full max-w-full items-center gap-1.5">
+                <Label htmlFor="fullName"> Full Name</Label>
+                <Input
                   type="text"
                   id="fullName"
                   name="fullName"
                   value={fullName}
                   onChange={handleFullNameChange}
                   placeholder="Johnny Mobbin"
-                  className="w-full outline-[#3D53DB] border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-[14.5px] pb-[14.5px] "
+                  className={`${false ? "border-destructive" : ""}`}
                 />
               </div>
-              <div className="w-full flex flex-col gap-4">
-                <div className="w-full text-[14px] font-semibold">Email</div>
-                <input
-                  onChange={(e) => setEmailAddress(e.target.value)}
+              <div className="grid w-full max-w-full items-center gap-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  type="email"
                   id="email"
                   name="email"
-                  type="email"
                   value={emailAddress}
-                  // onChange={handleEmailChange}
-                  placeholder="name@email.com"
-                  className="w-full outline-[#3D53DB] border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-[14.5px] pb-[14.5px] "
+                  onChange={(e) => setEmailAddress(e.target.value)}
+                  placeholder="jhonny@me.com"
+                  className={`${false ? "border-destructive" : ""}`}
                 />
               </div>
-              <div className="w-full flex flex-col gap-4">
-                <div className="w-full text-[14px] font-semibold">Password</div>
-                <span className="relative flex flex-row items-center">
-                  <input
-                    onChange={(e) => setPassword(e.target.value)}
-                    id="password"
-                    name="password"
-                    type={createHidePassword ? "password" : "text"}
-                    // type="password"
-                    value={password}
-                    placeholder="Create Password"
-                    className="w-full pr-12 outline-[#3D53DB] border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-[14.5px] pb-[14.5px] "
-                  />
-                  <button
-                    onClick={() => {
-                      setcreateHidePassword(!createHidePassword);
-                    }}
-                    className="absolute right-5"
-                  >
-                    {createHidePassword ? (
-                      <FaEyeSlash className="text-[16px] text-[#8E92BC]" />
-                    ) : (
-                      <FaEye className="text-[16px] text-[#8E92BC]" />
-                    )}
-                  </button>
-                </span>
-                <span className="relative flex flex-row items-center">
-                  <input
-                    type={confirmHidePassword ? "password" : "text"}
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    onChange={handleConfirmPasswordChange}
-                    placeholder="Confirm Password"
-                    className="w-full pr-12 outline-[#3D53DB] border-[1px] border-[#F5F5F7] rounded-[10px] px-5 pt-[14.5px] pb-[14.5px] "
-                  />
-                  <button
-                    className="absolute right-5"
-                    onClick={() => {
-                      setconfirmHidePassword(!confirmHidePassword);
-                    }}
-                  >
-                    {confirmHidePassword ? (
-                      <FaEyeSlash className="text-[16px] text-[#8E92BC]" />
-                    ) : (
-                      <FaEye className="text-[16px] text-[#8E92BC]" />
-                    )}
-                  </button>
-                </span>
-                {password !== confirmPassword && (
-                  <div className="text-red-500 text-sm mt-1">
-                    Password mismatch
-                  </div>
-                )}
+              <div className="grid w-full max-w-full items-center gap-1.5">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Create Password"
+                  className={`${false ? "border-destructive" : ""}`}
+                />
               </div>
-
-              <div className=" w-full flex flex-row items-center gap-3 pt-8">
-                <input
-                  type="checkbox"
-                  className="w-6 h-6 accent-[#3D53DB]"
+              <div className="grid w-full max-w-full items-center gap-1.5">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  placeholder="Confirm Password"
+                  className={`${false ? "border-destructive" : ""}`}
+                />
+              </div>
+              <div className="flex items-center space-x-4">
+                <Checkbox
+                  id="terms"
+                  className="w-5 h-5"
                   checked={isChecked}
-                  onChange={handleCheckboxChange}
+                  onClick={() => setIsChecked(!isChecked)}
                 />
-                <div className="w-full text-[14px] font-normal text-[#54577A]">
-                  I've read and agree with the{" "}
-                  <span className="font-medium text-[#10197A]">
+                <Label className="text-sm text-muted-foreground">
+                  I've read and agree with the&nbsp;
+                  <a
+                    role="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
                     Terms and Conditions
-                  </span>{" "}
-                  and the
-                  <span className="font-medium text-[#10197A]">
-                    {" "}
+                  </a>
+                  &nbsp;and the&nbsp;
+                  <a
+                    role="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
                     Privacy Policy.
-                  </span>
-                </div>
+                  </a>
+                </Label>
               </div>
-              <div className="w-full flex flex-row items-center gap-3 pt-3">
-                <input type="checkbox" className="w-6 h-6 accent-[#3D53DB]" />
-                <div className="w-full text-[14px] font-normal text-[#54577A]">
+              <div className="flex items-center space-x-4">
+                <Checkbox id="notifications" className="w-5 h-5" />
+                <Label className="text-sm text-muted-foreground">
                   Sign up to receive email notifications on our latest updates
-                </div>
+                </Label>
               </div>
-              <div className="w-full flex flex-col pt-8">
-                {/* <button
+              <div className="w-full flex flex-col gap-6">
+                <Button
                   onClick={handleSubmit}
-                  className="w-full bg-[#3D53DB] rounded-[10px] py-[13px] text-[#FFFFFF] text-4 font-semibold items-center justify-center"
-                >
-                  Get started
-                </button> */}
-                <button
-                  onClick={handleSubmit}
-                  className={`w-full bg-[#3D53DB] disabled:bg-[#3d52dba4] rounded-[10px] py-[13px] text-[#FFFFFF] text-4 font-semibold items-center justify-center`}
+                  variant="default"
+                  size="lg"
                   disabled={
                     !isChecked ||
                     emailAddress.length <= 0 ||
                     password !== confirmPassword
                   }
                 >
-                  Get started
-                </button>
-              </div>
-            </div>
-            <div className="w-full flex flex-col pt-6">
-              <div className=" w-full flex flex-row items-center justify-center gap-2">
-                <div className="h-px bg-[#DFE1F3] border-[1px] flex-grow"></div>
-                <div className="flex text-[14px] font-normal">
-                  Have an account already?
+                  Get Started
+                </Button>
+                <div className="w-full max-w-full flex flex-row gap-2 items-center justify-center relative">
+                  <Separator />
+                  <div className="text-[14px] shrink-0 font-normal justify-center absolute px-4 bg-white">
+                    Have an account already?
+                  </div>
                 </div>
-                <div className="h-px bg-[#DFE1F3] border-[1px] flex-grow"></div>
-              </div>
-
-              <div className="w-full flex flex-col pt-4">
-                <button
-                  onClick={handleClick}
-                  className="w-full hover:border-[#3D53DB] bg-[#FFFFFF] border-[#C2C6E8] border-[1px] px-[163.5px] py-[13px] rounded-[10px] text-[#54577A] text-4 font-semibold"
-                >
-                  Log in
-                </button>
+                <Button onClick={handleClick} variant="outlineDark" size="lg">
+                  Sign in
+                </Button>
               </div>
             </div>
           </div>

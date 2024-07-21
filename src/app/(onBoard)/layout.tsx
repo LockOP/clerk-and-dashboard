@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="w-screen h-dvh flex flex-col justify-start items-center py-10">
+    <div className="w-screen h-dvh flex flex-col justify-start items-center pt-10">
       <div className="bg-[white] shrink-0 w-full max-w-[1000px] flex flex-row items-start justify-center relative h-[76px]">
         {paths.map((item, index) => (
           <div className="flex-1 flex flex-col items-center justify-start gap-2 ">
