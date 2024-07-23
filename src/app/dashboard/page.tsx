@@ -1,6 +1,6 @@
 "use client";
+import { SignOutButton } from "@/components/SignOutButton";
 import { useUser } from "@clerk/nextjs";
-// import { SignOutButton } from "../components/SignOutButton";
 
 export default function Home() {
   const { user } = useUser();
@@ -15,7 +15,7 @@ export default function Home() {
         {JSON.stringify(user)} 
       </div> */}
       <div className="hover:border-[#3D53DB] bg-[#FFFFFF] border-[#C2C6E8] px-20 border-[1px] rounded-[10px] text-[#54577A] text-4 font-semibold">
-        {/* <SignOutButton /> */}
+        <SignOutButton />
       </div>
     </div>
   );
