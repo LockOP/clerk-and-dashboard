@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="w-screen h-dvh flex flex-col justify-start items-center pt-10">
       <div className="bg-[white] shrink-0 w-full max-w-[1000px] flex flex-row items-start justify-center relative h-[76px]">
         {paths.map((item, index) => (
-          <div className="flex-1 flex flex-col items-center justify-start gap-2 ">
+          <div key={index} className="flex-1 flex flex-col items-center justify-start gap-2 ">
             <div
               className={`w-[28px] h-[28px] rounded-full text-[12px] leading-4 font-medium flex justify-center items-center ani ${
                 index <=

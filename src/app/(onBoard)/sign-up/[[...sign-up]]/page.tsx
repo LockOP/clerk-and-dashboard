@@ -307,7 +307,7 @@ export default function SignUpForm() {
                   onClick={() => setIsChecked(!isChecked)}
                 />
                 <Label className="text-sm text-muted-foreground">
-                  I've read and agree with the&nbsp;
+                  I&apos;ve read and agree with the&nbsp;
                   <a
                     role="button"
                     onClick={(e) => {

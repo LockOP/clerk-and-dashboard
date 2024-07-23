@@ -31,36 +31,12 @@ export default function Page() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const steps = [
-    <Step1
-      onNext={() => {
-        setStep(2);
-      }}
-    />,
-    <Step2
-      onNext={() => {
-        setStep(3);
-      }}
-    />,
-    <Step3
-      onNext={() => {
-        setStep(4);
-      }}
-    />,
-    <Step4
-      onNext={() => {
-        setStep(5);
-      }}
-    />,
-    <Step5
-      onNext={() => {
-        setStep(6);
-      }}
-    />,
-    <Step6
-      onNext={() => {
-        router.push("/checkout");
-      }}
-    />,
+    <Step1 key={1} onNext={() => setStep(2)} />,
+    <Step2 key={2} onNext={() => setStep(3)} />,
+    <Step3 key={3} onNext={() => setStep(4)} />,
+    <Step4 key={4} onNext={() => setStep(5)} />,
+    <Step5 key={5} onNext={() => setStep(6)} />,
+    <Step6 key={6} onNext={() => router.push("/checkout")} />,
   ];
   return <>{steps[step - 1]}</>;
 }
@@ -519,6 +495,7 @@ function Step6({ onNext }: { onNext: () => void }) {
             <div className="grid grid-cols-3 w-full max-w-full gap-7">
               {planModules.map((module) => (
                 <PlanModuleCard
+                  key={module.id}
                   selected={sectedPlanModuleIds.includes(module.id)}
                   onSelect={({ id }) => {
                     if (sectedPlanModuleIds.includes(id)) {

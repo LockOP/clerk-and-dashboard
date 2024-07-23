@@ -35,7 +35,7 @@ export default function Page() {
               Activate your workspace
             </p>
             <p className="text-base text-muted-foreground line-clamp-2">
-              Here's what you will get with the small business plan
+              Here&apos;s what you will get with the small business plan
             </p>
             <div className="flex flex-col w-full items-start p-4 gap-3">
               <div className="w-full flex flex-row justify-start items-center gap-1">

@@ -65,7 +65,7 @@ export default function Page() {
                 </AccordionTrigger>
                 <AccordionContent className="p-5 border-t border-input flex flex-col gap-6">
                   <div className="grid w-full max-w-full items-center gap-1.5">
-                    <Label htmlFor="recipientName">Recipient's Name</Label>
+                    <Label htmlFor="recipientName">Recipient&apos;s Name</Label>
                     <Input
                       type="text"
                       id="recipientName"
@@ -77,7 +77,7 @@ export default function Page() {
                     />
                   </div>
                   <div className="grid w-full max-w-full items-center gap-1.5">
-                    <Label htmlFor="recipientEmail">Recipient's Email</Label>
+                    <Label htmlFor="recipientEmail">Recipient&apos;s Email</Label>
                     <Input
                       type="text"
                       id="recipientEmail"
@@ -109,7 +109,7 @@ export default function Page() {
                   </div>
                   <div className="flex flex-row items-end w-full gap-3">
                     <div className="grid flex-grow overscroll-auto items-center gap-1.5">
-                      <Label htmlFor="recipientEmail">Recipient's Email</Label>
+                      <Label htmlFor="recipientEmail">Recipient&apos;s Email</Label>
                       <Input
                         type="text"
                         id="recipientEmail"
@@ -150,7 +150,7 @@ export default function Page() {
                 </AccordionTrigger>
                 <AccordionContent className="p-5 border-t border-input flex flex-col gap-6">
                   <div className="grid w-full max-w-full items-center gap-1.5">
-                    <Label htmlFor="recipientName">Recipient's Name</Label>
+                    <Label htmlFor="recipientName">Recipient&apos;s Name</Label>
                     <Input
                       type="text"
                       id="recipientName"
@@ -162,7 +162,7 @@ export default function Page() {
                     />
                   </div>
                   <div className="grid w-full max-w-full items-center gap-1.5">
-                    <Label htmlFor="recipientEmail">Recipient's Email</Label>
+                    <Label htmlFor="recipientEmail">Recipient&apos;s Email</Label>
                     <Input
                       type="text"
                       id="recipientEmail"
@@ -194,7 +194,7 @@ export default function Page() {
                   </div>
                   <div className="flex flex-row items-end w-full gap-3">
                     <div className="grid flex-grow overscroll-auto items-center gap-1.5">
-                      <Label htmlFor="recipientEmail">Recipient's Email</Label>
+                      <Label htmlFor="recipientEmail">Recipient&apos;s Email</Label>
                       <Input
                         type="text"
                         id="recipientEmail"

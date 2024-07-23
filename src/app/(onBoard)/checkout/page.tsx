@@ -532,7 +532,7 @@ export default function Page() {
                         <AccordionContent className="border-t border-input flex flex-col w-full p-0">
                           <div className="w-full flex flex-col p-4 border-b border-input">
                             {additionalPlans.map((plan) => (
-                              <div className="w-full flex h-8 flex-row justify-between items-center gap-2.5">
+                              <div key={plan.id} className="w-full flex h-8 flex-row justify-between items-center gap-2.5">
                                 <span className="flex-grow flex flex-row items-center justify-start gap-2.5">
                                   {cloneElement(plan.icon, {
                                     className: cn(

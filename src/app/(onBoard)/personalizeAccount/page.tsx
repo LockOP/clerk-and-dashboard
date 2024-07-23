@@ -54,6 +54,7 @@ export default function Page() {
               <div className="flex flex-row gap-2 w-full">
                 {colorOptions.map((option) => (
                   <button
+                    key={option}
                     className={`w-8 h-8 rounded-full shrink-0 ${
                       option === color
                         ? "outline outline-offset-1 outline-primary"

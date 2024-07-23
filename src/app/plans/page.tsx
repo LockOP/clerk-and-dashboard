@@ -281,7 +281,7 @@ export default function Page() {
               className="flex flex-row gap-4 items-center justify-center h-max rounded-md"
             >
               {item.plans.map((card) => (
-                <Card className="w-[280px] h-max">
+                <Card key={card.title} className="w-[280px] h-max">
                   <CardHeader>
                     <CardTitle className="text-lg font-medium line-clamp-1">
                       {card.title}
@@ -304,7 +304,7 @@ export default function Page() {
                       {card.list.map((listItem) => {
                         if (index > 3) return <></>;
                         return (
-                          <li>
+                          <li key={listItem.label}>
                             <HoverCard>
                               <HoverCardTrigger className="h-12 p-3 w-full text-sm bg-primary-foreground flex flex-row items-center gap-2 rounded">
                                 <FaCheckCircle className="text-base text-primary font-normal shrink-0" />
